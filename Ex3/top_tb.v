@@ -21,7 +21,8 @@ reg change;
 reg on_off;
 reg clk;
 reg err;
-reg counter_out;
+wire [7:0] counter_out;
+reg [7:0] counter_out_prev;
 //Todo: Clock generation
 initial
     begin
@@ -31,23 +32,43 @@ initial
      end
 //Todo: User logic
 initial begin
-    rst=0;
+    rst=1;
     change=0;
     on_off=0;
     err=0;
     #(CLK_PERIOD)
-    //forever
-        //#(5*CLK_PERIOD)  on_off = ~on_off;
-    forever
-        #(20*CLK_PERIOD) change = ~change;
-     end
-
-initial begin
-    #(90*CLK_PERIOD) rst = 1;
+    if (counter_out != 0) begin
+        $display("***TEST FAILED! rst==%d, counter_out=%d ***",rst,counter_out);
+        err=1;
+    end
+    counter_out_prev = counter_out;
+    rst = 0;
+    #(3*CLK_PERIOD)
+    if (counter_out != counter_out_prev) begin
+        $display("***TEST FAILED! change==%d, counter_out=%d counter_out_prev=%d ***",change,counter_out,counter_out_prev);
+        err=1; 
+    end
+    change = 1;
+    forever begin
+        on_off = ~on_off;
+        counter_out_prev = counter_out;
+        #(3*CLK_PERIOD)
+	if (on_off) begin
+            if (counter_out != (counter_out_prev + 3)) begin
+                $display("***TEST FAILED! on_off==%d, counter_out=%d counter_out_prev=%d ***",change,counter_out,counter_out_prev);
+                err = 1;
+            end
+        end else begin
+            if (counter_out != (counter_out_prev - 3)) begin
+                $display("***TEST FAILED! on_off==%d, counter_out=%d counter_out_prev=%d ***",change,counter_out,counter_out_prev);
+                err = 1;
+            end
+        end
+    end
 end
 //Todo: Finish test, check for success
 initial begin
-        #(100*CLK_PERIOD)
+        #(60*CLK_PERIOD)
         if (err==0)
           $display("***TEST PASSED! :) ***");
         $finish;
