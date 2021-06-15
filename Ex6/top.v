@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Exercise #6 - RGB Colour Converter
-// Student Name:
-// Date: 
+// Student Name: Edward Gunn
+// Date: 15/06/21
 //
 //
 //  Description: In this exercise, you need to design a memory with 8 entries, 
@@ -15,3 +15,20 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+`timescale 1ns / 100ps
+
+module rgb_converter (
+    //Todo: add ports
+    input clk, colour, enable,
+    output rgb 
+    );
+   
+blk_mem_gen_0 your_instance_name (
+  .clka(clk),    // input wire clka
+  .ena(enable),      // input wire ena
+  .wea(1'b0),      // input wire [0 : 0] wea
+  .addra(colour),  // input wire [2 : 0] addra
+  .dina(24'd0),    // input wire [23 : 0] dina
+  .douta(rgb)  // output wire [23 : 0] douta
+);
+endmodule
