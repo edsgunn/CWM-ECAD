@@ -30,21 +30,21 @@ initial
 //Todo: User logic
 initial begin
     err = 0;
-    temp = 5'd15;
+    temp = 5'd16;
     
     forever begin
-    	#(3*CLK_PERIOD)
+    	#(CLK_PERIOD)
 	if((temp<=5'd18)&(!heating)&(cooling)) begin 
-        	err = 1;
-		$display("*** Test Failed :( *** heating=%d cooling=%d temperature =%d", heating,cooling,temp);
+            err = 1;
+	    $display("*** Test Failed :( *** heating=%d cooling=%d temperature =%d", heating,cooling,temp);
     	end
 	if ((temp>=5'd22)&(heating)&(!cooling)) begin
-        	err = 1;
-		$display("*** Test Failed :( *** heating=%d cooling=%d temperature =%d", heating,cooling,temp);
+            err = 1;
+	    $display("*** Test Failed :( *** heating=%d cooling=%d temperature =%d", heating,cooling,temp);
     	end 
 	if ((heating)&(cooling)) begin
-        	err = 1;
-		$display("*** Test Failed :( *** heating=%d cooling=%d", heating,cooling);
+            err = 1;
+	    $display("*** Test Failed :( *** heating=%d cooling=%d", heating,cooling);
     	end 
 	    
     	temp <= temp + 5'd1;

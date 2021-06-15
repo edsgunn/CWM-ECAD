@@ -17,7 +17,8 @@
 
 module acsystem (
     //Todo: add ports
-    input clk,temp,
+    input clk,
+    input [4:0] temp,
     output heating,cooling
     );
                     
