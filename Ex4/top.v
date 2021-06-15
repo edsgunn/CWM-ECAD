@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Exercise #4 - Dynamic LED lights
-// Student Name:
-// Date: 
+// Student Name: Edward Gunn
+// Date: 15/06/21
 //
 //  Description: In this exercise, you need to design a LED based lighting solution, 
 //  following the diagram provided in the exercises documentation. The lights change 

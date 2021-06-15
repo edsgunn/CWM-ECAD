@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Test bench for Exercise #4 - Dynamic LED lights
-// Student Name:
-// Date: 
+// Student Name: Edward Gunn
+// Date: 15/06/21
 //
 // Description: A testbench module to test Ex4 - Dynamic LED lights
 // You need to write the whole file
@@ -19,8 +19,8 @@ reg rst;
 reg button;
 reg clk;
 reg err;
-wire [3:0] colour;
-reg [3:0] prev_colour;
+wire [2:0] colour;
+reg [2:0] prev_colour;
 //Todo: Clock generation
 initial
     begin
