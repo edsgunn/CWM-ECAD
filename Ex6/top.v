@@ -19,8 +19,10 @@
 
 module rgb_converter (
     //Todo: add ports
-    input clk, colour, enable,
-    output rgb 
+    input clk, 
+    input [2:0] colour,
+    input enable,
+    output [23:0] rgb 
     );
    
 blk_mem_gen_0 your_instance_name (

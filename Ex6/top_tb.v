@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Test bench for Exercise #6 - RGB Colour Converter
-// Student Name:
-// Date: 
+// Student Name: Edward Gunn
+// Date: 16/06/21
 //
 // Description: A testbench module to test Ex6 - RGB Colour Converter
 // You need to write the whole file
@@ -41,26 +41,27 @@ initial begin
     forever begin
         enable = 1;
         rgb_prev = rgb;
-        colour = colour + 3'd1;
-        #(CLK_PERIOD)
+        colour <= (colour + 3'd1);
+        #(3*CLK_PERIOD)
         if (rgb_prev == rgb) begin
-            $display("***TEST FAILED :(***");
+            $display("***TEST FAILED :( colour=%d rgb=%d rgb_prev=%d ***",colour,rgb,rgb_prev);
 	    err = 1;
         end
     end
 end
   
  initial begin
-    #500
+    #(60*CLK_PERIOD)
     if (err==0)
       $display("***TEST PASSED! :) ***");
       $finish;
  end
      
-rgb_converter top (.enable (enable),
-	       .colour (colour),
-	       .rgb (rgb),
-	       .clk (clk)
-	       );
+rgb_converter top (
+         .enable (enable),
+	 .colour (colour),
+	 .rgb (rgb),
+	 .clk (clk)
+	 );
 
 endmodule 
