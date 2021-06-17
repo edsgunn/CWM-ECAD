@@ -22,6 +22,7 @@ module top(
     input temperature_2,
     input temperature_3,
     input temperature_4,
+    input rst_n,
     output heating,cooling
    );
     

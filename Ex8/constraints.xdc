@@ -38,9 +38,9 @@ set_property IOSTANDARD LVCMOS18 [get_ports {temperature_3}]
 set_property PACKAGE_PIN AT20 [get_ports {temperature_4}]
 set_property IOSTANDARD LVCMOS18 [get_ports {temperature_4}]
 
-set_property PACKAGE_PIN BD21 [get_ports rst_n]
+set_property PULLUP true [get_ports rst_n]
 set_property IOSTANDARD LVCMOS18 [get_ports rst_n]
-set_property PULLUP true [get_ports reset_n]
+set_property PACKAGE_PIN BD21 [get_ports rst_n]
 
 #############################################################################################################
 

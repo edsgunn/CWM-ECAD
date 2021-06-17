@@ -18,20 +18,21 @@ parameter CLK_PERIOD = 10;
 reg [4:0] temp;
 reg err;
 reg clk_p;
-reg clk_n;
+wire clk_n;
 wire heating;
 wire cooling;
 //Todo: Clock generation
+
 initial
     begin
        clk_p = 1'b1;
-       clk_n = 1'b0;
        forever begin
          #(CLK_PERIOD/2) 
          clk_p=~clk_p;
-         clk_n=~clk_n;
        end
     end
+
+assign clk_n = ~clk_p;
 //Todo: User logic
 initial begin
     err = 0;
@@ -64,11 +65,12 @@ initial begin
       end
 //Todo: Instantiate counter module
 top top (
-   .temperature_0 (temp[4]),
-   .temperature_1 (temp[3]),
+   .temperature_0 (temp[0]),
+   .temperature_1 (temp[1]),
    .temperature_2 (temp[2]),
-   .temperature_3 (temp[1]),
-   .temperature_4 (temp[0]),
+   .temperature_3 (temp[3]),
+   .temperature_4 (temp[4]),
+   .rst_n (1'b0),
    .clk_p (clk_p),
    .clk_n (clk_n),
    .heating (heating),
