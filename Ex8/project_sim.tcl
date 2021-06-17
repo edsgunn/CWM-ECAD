@@ -17,9 +17,12 @@ set_property top ${top} [current_fileset]
 puts "Creating Project"
 
 create_fileset -constrset -quiet constraints
+create_clock -name clk_p -period 10 [get_ports clk_p]
+create_clock -name clk_n -period 10 [get_ports clk_n]
 
 read_verilog "top.v"
 read_verilog "top_tb.v"
+read_verilog "ac_controller.v"
 
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
