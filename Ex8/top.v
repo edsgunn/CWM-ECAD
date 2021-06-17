@@ -17,7 +17,11 @@ module top(
     input clk_p,
     input clk_n,
      //Todo: add all other ports besides clk_n and clk_p 
-    input [4:0] temp,
+    input temperature_0,
+    input temperature_1,
+    input temperature_2,
+    input temperature_3,
+    input temperature_4,
     output heating,cooling
    );
     
@@ -39,6 +43,8 @@ module top(
       );
 
 //Add logic here
+wire [4:0] temp = {temperature_4, temperature_3, temperature_2, temperature_1, temperature_0};
+
 acsystem ac_controller(
     .clk (clk),
     .temp (temp),
