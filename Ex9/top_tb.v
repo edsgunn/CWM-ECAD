@@ -21,7 +21,7 @@ initial
        end
     end
 
-    top top(
+    top thing(
         .in(in),
         .out(out),
         .aclk(aclk)
