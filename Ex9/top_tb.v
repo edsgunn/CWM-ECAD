@@ -22,8 +22,8 @@ initial
     end
 
     top top(
-        .in(in)
-        .out(out)
+        .in(in),
+        .out(out),
         .aclk(aclk)
     );
 endmodule

@@ -5,7 +5,7 @@ set sim_top top_tb
 set device xcvu9p-fsgd2104-2L-e
 set proj_dir ./project
 set repo_dir ./ip_repo
-set project_constraints constraints.xdc
+#set project_constraints constraints.xdc
 
 set test_name "test"
 
@@ -15,14 +15,21 @@ set_property source_mgmt_mode DisplayOnly [current_project]
 set_property top ${top} [current_fileset]
 puts "Creating Project"
 
-create_fileset -constrset -quiet constraints
+#create_fileset -constrset -quiet constraints
 
 #Todo: Add your IP here
-create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name blk_mem_gen_0
-set_property -dict [list CONFIG.Write_Width_A {24} CONFIG.Write_Depth_A {8} CONFIG.Read_Width_A {24} CONFIG.Write_Width_B {24} CONFIG.Read_Width_B {24} CONFIG.Load_Init_File {true} CONFIG.Coe_File {/home/centos/CWM-ECAD/Ex6/mem.coe}] [get_ips blk_mem_gen_0]
+create_ip -name floating_point -vendor xilinx.com -library ip -version 7.1 -module_name floating_point_0
+set_property -dict [list CONFIG.Operation_Type {Exponential} CONFIG.A_Precision_Type {Single} CONFIG.C_A_Exponent_Width {8} CONFIG.C_A_Fraction_Width {24} CONFIG.Result_Precision_Type {Single} CONFIG.C_Result_Exponent_Width {8} CONFIG.C_Result_Fraction_Width {24} CONFIG.C_Mult_Usage {Medium_Usage} CONFIG.C_Latency {21} CONFIG.C_Rate {1}] [get_ips floating_point_0]
+
+create_ip -name floating_point -vendor xilinx.com -library ip -version 7.1 -module_name floating_point_1
+set_property -dict [list CONFIG.Add_Sub_Value {Add}] [get_ips floating_point_1]
+
+create_ip -name floating_point -vendor xilinx.com -library ip -version 7.1 -module_name floating_point_2
+set_property -dict [list CONFIG.Operation_Type {Divide} CONFIG.A_Precision_Type {Single} CONFIG.C_A_Exponent_Width {8} CONFIG.C_A_Fraction_Width {24} CONFIG.Result_Precision_Type {Single} CONFIG.C_Result_Exponent_Width {8} CONFIG.C_Result_Fraction_Width {24} CONFIG.C_Mult_Usage {No_Usage} CONFIG.C_Latency {29} CONFIG.C_Rate {1}] [get_ips floating_point_2]
 
 read_verilog "top.v"
 read_verilog "top_tb.v"
+read_verilog "sigmoid.v"
 
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
